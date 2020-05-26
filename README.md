@@ -7,4 +7,4 @@ To get started:
 
 - Login to [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell/editor)
 
-Thanks for visiting!
+Thanks for visiting! :)
