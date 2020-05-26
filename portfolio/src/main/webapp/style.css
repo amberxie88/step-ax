@@ -1,9 +1,85 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+/* Color Palette Inspiration
+* link: https://coolors.co/f6bd60-f7ede2-f5cac3-84a59d-f28482
+*/
+
+:root{
+  --main-font: "Rubik", sans-serif;
+  --color-navbar: #84A59D; /*nav bar*/
+  --color-title: #F28482;
+  --body-A: #F7EDE2;
+  --body-B: #F5CAC3;
 }
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 
 #greeting-container {
   margin-top: 20px;
+}
+
+nav li {
+    display:inline;
+}
+
+nav ul{
+    padding:0;
+}
+
+#navbar{
+    width:100%;
+    position:fixed;
+    background-color: var(--color-navbar);
+}
+
+.nav-items {
+    display:flex;
+    padding-left: 10%;
+    margin-right: 10%;
+}
+
+body{
+    margin: 0 0 0 0;
+}
+
+h1, h2, h3, p {
+    margin: 0 0 0 0;
+}
+
+#title,
+#about-content,
+#contact-content,
+#random-content,
+#gallery-content,
+#project-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left:10%;
+    padding-right:10%;
+    margin: 0 0 0 0;
+}
+
+#title {
+  padding-top: 55px !important;
+  background-color: var(--color-title);
+}
+
+#about-content {
+    background-color: var(--body-A);
+}
+
+#project-content {
+    background-color: var(--body-B);
+}
+
+#contact-content {
+    background-color: var(--body-A);
+}
+
+#gallery-content {
+    background-color: var(--body-B);
+}
+
+#random-content {
+    background-color: var(--body-A);
 }
