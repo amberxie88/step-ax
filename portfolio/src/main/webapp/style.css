@@ -1,20 +1,17 @@
 /* Color Palette Inspiration
 * link: https://coolors.co/f6bd60-f7ede2-f5cac3-84a59d-f28482
-
-      <img src="images/bunny.jpg" width=33%></img>
-      <img src="images/dc.jpg" width=33%></img>
-      <img src="images/sagrada.jpg" width=33%></img>
-      <img src="images/ub.jpg" width=33%></img>
-      <img src="images/msg.jpg" width=33%></img>
-      <img src="images/cal.jpg" width=33%></img>
+* link: https://coolors.co/231942-5e548e-9f86c0-be95c4-e0b1cb
 */
 
 :root{
   --main-font: "Rubik", sans-serif;
-  --color-navbar: #84A59D; /*nav bar*/
+  --color-navbar: #231942; /*nav bar*/
   --color-title: #F28482;
-  --body-A: #F7EDE2;
-  --body-B: #F5CAC3;
+  --body-A: #E0B1CB;
+  --body-B: #BE95C4;
+  --body-C: #9F86C0;
+  --body-D: #5E548E;
+
 }
 
 /* Font */
@@ -31,6 +28,16 @@ nav li {
     display:inline;
 }
 
+.nav-a {
+    color: white;
+}
+
+#nav-title {
+    margin-bottom: 5px;
+    overflow-x:hidden;
+    display:inline-block; 
+}
+
 nav ul{
     padding:0;
 }
@@ -39,22 +46,44 @@ nav ul{
     width:100%;
     position:fixed;
     background-color: var(--color-navbar);
+    color:white;
+    padding-left: 5%;
+    padding-right:5%;
 }
 
 .nav-items {
     display:flex;
     padding-left: 20%;
-    margin-right: 20%;
+    margin-right: 5%;
+    float: right;
+    padding-right: 5%;
 }
 
 body{
     margin: 0 0 0 0;
 }
 
+h1,h2 {
+    font-family: 'Merriweather', serif;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 24px
+}
+
+p {
+   font-family: 'Caladea', serif;
+   font-size:14px;
+}
+
 h1, h2, h3, p {
     padding-top: 15px;
-    margin: 0 0 0 0;
-    font-family: Verdana, Geneva, sans-serif;
+    margin: 0 0 0 0;    
 }
 
 #title,
@@ -92,11 +121,11 @@ h1, h2, h3, p {
 }
 
 #gallery-content {
-    background-color: var(--body-A);
+    background-color: var(--body-C);
 }
 
 #random-content {
-    background-color: var(--body-B);
+    background-color: var(--body-D);
 }
 
 .txt {
@@ -111,7 +140,7 @@ h1, h2, h3, p {
     display:flex;
 }
 
-#about-container {
+#nav-container {
 }
 
 .pic {
@@ -119,7 +148,11 @@ h1, h2, h3, p {
   text-align: center;
   color: white;
   width:33%;
-  margin:10px;
+  margin:10px;  
+}
+
+.pic :hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
 img {
