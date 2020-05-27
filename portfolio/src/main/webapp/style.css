@@ -1,5 +1,12 @@
 /* Color Palette Inspiration
 * link: https://coolors.co/f6bd60-f7ede2-f5cac3-84a59d-f28482
+
+      <img src="images/bunny.jpg" width=33%></img>
+      <img src="images/dc.jpg" width=33%></img>
+      <img src="images/sagrada.jpg" width=33%></img>
+      <img src="images/ub.jpg" width=33%></img>
+      <img src="images/msg.jpg" width=33%></img>
+      <img src="images/cal.jpg" width=33%></img>
 */
 
 :root{
@@ -11,7 +18,9 @@
 }
 
 /* Font */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');
 
 
 #greeting-container {
@@ -34,8 +43,8 @@ nav ul{
 
 .nav-items {
     display:flex;
-    padding-left: 10%;
-    margin-right: 10%;
+    padding-left: 20%;
+    margin-right: 20%;
 }
 
 body{
@@ -43,7 +52,9 @@ body{
 }
 
 h1, h2, h3, p {
+    padding-top: 15px;
     margin: 0 0 0 0;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 #title,
@@ -52,34 +63,66 @@ h1, h2, h3, p {
 #random-content,
 #gallery-content,
 #project-content {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left:10%;
-    padding-right:10%;
+    padding-top: 55px;
+    padding-bottom: 75px;
+    padding-left:20%;
+    padding-right:20%;
     margin: 0 0 0 0;
 }
 
 #title {
   padding-top: 55px !important;
+  padding-bottom: 30px !important;
   background-color: var(--color-title);
 }
 
 #about-content {
     background-color: var(--body-A);
+    font-family: Verdana, Geneva, sans-serif;
 }
+
+/*
+#contact-content {
+    background-color: var(--body-A);
+}
+*/
 
 #project-content {
     background-color: var(--body-B);
 }
 
-#contact-content {
-    background-color: var(--body-A);
-}
-
 #gallery-content {
-    background-color: var(--body-B);
+    background-color: var(--body-A);
 }
 
 #random-content {
-    background-color: var(--body-A);
+    background-color: var(--body-B);
+}
+
+.txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding:20px;
+}
+
+.gallery-img {
+    display:flex;
+}
+
+#about-container {
+}
+
+.pic {
+  position: relative;
+  text-align: center;
+  color: white;
+  width:33%;
+  margin:10px;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 5%;
 }

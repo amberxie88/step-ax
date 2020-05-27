@@ -17,7 +17,7 @@
  */
 function addRandomGreeting() {
   const greetings =
-      ['The Truman Show', 'Inception', 'Interstellar', 'Contact', 'Eternal Sunshine of the Spotless Mind', 'Ex Machina', 'Wall-E', 'Hidden Figures'];
+      ['The Truman Show', 'Inception', 'Interstellar', 'Contact', 'Eternal Sunshine of the Spotless Mind', 'Ex Machina', 'Wall-E', 'Hidden Figures', 'Memento'];
 
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -25,4 +25,17 @@ function addRandomGreeting() {
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
+}
+
+function addCaption(id, txt) {
+  const txtContainer = document.getElementById(id);
+  txtContainer.innerText = txt;
+  txtContainer.style.background = "rgba(100, 149, 237, 0.7)";
+  txtContainer.style.borderRadius = "10px";
+}
+
+function remCaption(id) {
+  const txtContainer = document.getElementById(id);
+  txtContainer.innerText = "";
+  txtContainer.style.backgroundColor = "rgba(0,0,0,0)";
 }
