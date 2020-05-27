@@ -39,3 +39,15 @@ function remCaption(id) {
   txtContainer.innerText = "";
   txtContainer.style.backgroundColor = "rgba(0,0,0,0)";
 }
+
+/**
+ * Copied from walkthrough code:
+ * Another way to use fetch is by using the async and await keywords. This
+ * allows you to use the return values directly instead of going through
+ * Promises.
+ */
+async function getHelloAsync() {
+  const response = await fetch('/data');
+  const eyo = await response.text();
+  document.getElementById('hello-container').innerHTML = eyo;
+}
