@@ -14,6 +14,8 @@
 
 package com.google.sps.servlets;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +26,34 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private static ArrayList<String> colors = new ArrayList<String>(Arrays.asList("yellow", "blue", "indigo"));
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Amber!</h1>");
+    //response.getWriter().println("<h1>Hello Amber!</h1>");
+    String returnString = convertToJson(colors);
+    response.getWriter().println(returnString);
   }
+  
+
+  /**
+   * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
+   * the Gson library dependency to pom.xml.
+   */
+  private String convertToJson(ArrayList<String> input) {
+      String json = "{ \"colors\": [";
+      int index=0;
+    for (int i = 0; i < input.size(); i++) {
+        String item = input.get(i);
+        json+= "\"" + item + "\"";
+        if (i + 1 != input.size()) {
+            json+=", ";
+        }
+        index+=1;
+    }
+    json +="]}";
+    return json;
+  }
+
 }

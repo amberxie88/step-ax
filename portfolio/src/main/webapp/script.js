@@ -47,7 +47,23 @@ function remCaption(id) {
  * Promises.
  */
 async function getHelloAsync() {
-  const response = await fetch('/data');
-  const eyo = await response.text();
-  document.getElementById('hello-container').innerHTML = eyo;
+  fetch('/data').then(response => response.json()).then((stats) => {
+      const helloElement = document.getElementById('hello-container');
+      helloElement.innerHTML = '';
+    createList(helloElement, stats.colors);
+
+  });
+}
+
+function createList(element, array) {
+    console.log("Hello");
+    console.log(array);
+    console.log(array[0]);
+    console.log(array.length);
+
+    array.forEach(item => {
+        const liElement = document.createElement('li');
+        liElement.innerText = item;
+        element.appendChild(liElement);
+    });
 }
