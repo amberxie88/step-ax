@@ -1,16 +1,23 @@
 /* Color Palette Inspiration
 * link: https://coolors.co/f6bd60-f7ede2-f5cac3-84a59d-f28482
 * link: https://coolors.co/231942-5e548e-9f86c0-be95c4-e0b1cb
-*/
-
-:root{
-  --main-font: "Rubik", sans-serif;
-  --color-navbar: #231942; /*nav bar*/
+* link: https://colorpalettes.net/color-palette-4208/
+  --color-navbar: #231942; 
   --color-title: #F28482;
   --body-A: #E0B1CB;
   --body-B: #BE95C4;
   --body-C: #9F86C0;
   --body-D: #5E548E;
+*/
+
+:root{
+  --main-font: "Rubik", sans-serif;
+  --color-navbar: #b7c06f; /*nav bar*/
+  --color-title: #F28482;
+  --body-A: #dde0b6;
+  --body-B: #f3e6be;
+  --body-C: #f5a883;
+  --body-D: #CE7950;
 
 }
 

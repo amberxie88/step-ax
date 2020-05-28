@@ -67,3 +67,22 @@ function createList(element, array) {
         element.appendChild(liElement);
     });
 }
+
+/**
+ * Fetches the current state of the comment section and builds the UI.
+ */
+function getCommentSection() {
+  fetch('/comment-section').then(response => response.json()).then((comments) => {
+    const historyEl = document.getElementById('comment-history');
+    comments.comments.forEach((c) => {
+        historyEl.appendChild(createListElement(c));
+    });
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
