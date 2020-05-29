@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getCommentSection()">
+  <body onload="getCommentSection(-1)">
       <nav id="navbar">
               <h1 id="nav-title">My Portfolio</h1>
           <div class="nav-items">
@@ -77,7 +77,7 @@
     <div id="gallery-content">
       <h2>Some Cool Photos</h2>
       <div class="gallery-img">
-        <div class="pic" onmouseover="addCaption('dc-txt', 'My high school\'s Competition Civics (We the People) team qualified for Nationals and placed 4th. Exhausting, enlightening, and rewarding experience.')" onmouseout="remCaption('dc-txt')">
+        <div class="pic" onmouseover="addCaption('dc-txt', 'My high school\'s Competition Civics (We the People) team qualified for Nationals and placed 4th. Good times in D.C.')" onmouseout="remCaption('dc-txt')">
           <img src="images/dc.jpg"></img>
           <div class="txt" id="dc-txt"></div>
         </div>
@@ -133,6 +133,8 @@
 
         <input type="submit" />
         </form>
+        <label for="quantity">Number of Comments Shown:</label>
+        <input onChange="getCommentSection(this.value)" type="number" id="quantity" name="quantity" min="1" max="25">
       </div>
     </div>
     </div>

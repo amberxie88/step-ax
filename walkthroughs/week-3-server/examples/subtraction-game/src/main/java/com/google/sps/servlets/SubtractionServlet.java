@@ -60,7 +60,6 @@ public final class SubtractionServlet extends HttpServlet {
   private int getPlayerChoice(HttpServletRequest request) {
     // Get the input from the form.
     String playerChoiceString = request.getParameter("player-choice");
-
     // Convert the input to an int.
     int playerChoice;
     try {

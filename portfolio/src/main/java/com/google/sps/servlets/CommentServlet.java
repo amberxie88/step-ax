@@ -36,6 +36,7 @@ public final class CommentServlet extends HttpServlet {
     response.setContentType("application/json");
     String returnString = convertToJson(msgHistory);
     response.getWriter().println(returnString);
+
   }
 
 
