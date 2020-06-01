@@ -201,13 +201,14 @@ input[type=submit]:hover{
     padding-left: 15px !important;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 #leave-comment {
     background-color: var(--body-C);
     padding: 5px;
     padding-left:15px !important;
-    padding-bottom: 10px !important;
+    padding-bottom: 15px !important;
     border-radius: 10px;
     margin-bottom: 10px;
 }
