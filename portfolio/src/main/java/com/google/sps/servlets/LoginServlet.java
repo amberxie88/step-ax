@@ -35,14 +35,51 @@ public class LoginServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      response.getWriter().println("<p>Hello " + userEmail + "!</p>");
-      response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
+      String responseJSON = convertToJSON(userService, true);
+      response.getWriter().println(responseJSON);
+      //response.getWriter().println("<p>Hello " + userEmail + "!</p>");
+      //response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
     } else {
       String urlToRedirectToAfterUserLogsIn = "/";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-      response.getWriter().println("<p>Hello stranger.</p>");
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+      String responseJSON = convertToJSON(userService, false);
+      response.getWriter().println(responseJSON);
+      //response.getWriter().println("<p>Hello stranger.</p>");
+      //response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
     }
   }
+
+  private String convertToJSON(UserService userService, boolean status) {
+      String responseJSON = "{" + formatLoginStatus(status) + ", " + formatLoginHTML(userService, status) + "}";
+      return responseJSON;
+  }
+
+  private String formatLoginStatus(boolean status) {
+      String loginJSON = "\"loginStatus\": \"" + String.valueOf(status) +"\"";
+      return loginJSON;
+  }
+
+  private String formatLoginHTML(UserService userService, boolean status) {
+      String loginHTML = "\"loginHTML\": \"";
+      
+      if (status) { 
+        // If you are logged in and want a logout URL
+        String userEmail = userService.getCurrentUser().getEmail();
+        String urlToRedirectToAfterUserLogsOut = "/";
+        String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
+        loginHTML += "<p>Hello " + userEmail + "!</p>";
+        loginHTML += "<p>Logout <a href=\\\"" + logoutUrl + "\\\">here</a>.</p>";
+      } else { 
+        // If you are logged out and want a login URL
+        String urlToRedirectToAfterUserLogsIn = "/";
+        String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+        loginHTML += "<p>Hello stranger.</p>";
+        loginHTML += "<p>Login <a href=\\\"" + loginUrl + "\\\">here</a>.</p>";
+      }
+      loginHTML += "\"";
+      return loginHTML;
+  }
+
+
 }

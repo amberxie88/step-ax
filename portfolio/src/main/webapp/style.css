@@ -213,6 +213,10 @@ input[type=submit]:hover{
     margin-bottom: 10px;
 }
 
+#leave-comment-form {
+    display: none; /* until verified to be logged in */
+}
+
 .button {
     background-color: #86360F;
     border: none;
@@ -221,4 +225,8 @@ input[type=submit]:hover{
 
 .button:hover{
     background-color: #AA562D;
+}
+
+#login-warning {
+    margin-top: 0;
 }

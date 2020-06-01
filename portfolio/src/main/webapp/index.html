@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getCommentSection(-1)">
+  <body onload="reloadPage()">
       <nav id="navbar">
               <h1 id="nav-title">My Portfolio</h1>
           <div class="nav-items">
@@ -141,19 +141,22 @@
                 </form>
             </div>
         </div>
-        
-        <div id= "leave-comment">
-            <form action="/comment-section" method="POST">
-            <h3>Add a Message</h3>
-            <p>Name:</p>
-            <input type="text" name="name-input" value="Name">
+        <br>
+        <div id="leave-comment">
+            <div id="leave-comment-form">
+                <form action="/comment-section" method="POST">
+                <h3>Add a Message</h3>
+                <p>Name:</p>
+                <input type="text" name="name-input" value="Name">
 
-            <p>Comment field:</p>
-            <input type="text" name="comment-input" value="Leave me a comment!">
-            <br/><br/>
+                <p>Comment field:</p>
+                <input type="text" name="comment-input" value="Leave me a comment!">
+                <br/><br/>
 
-            <input type="submit" />
-            </form>
+                <input type="submit" />
+                </form>
+            </div>
+            <p id="login-warning">Please log in</p>
         </div>
     </div>
     </div>

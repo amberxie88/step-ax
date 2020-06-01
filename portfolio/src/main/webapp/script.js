@@ -86,7 +86,6 @@ function getCommentSection(numComments) {
     const historyEl = document.getElementById('comment-history');
     comments.comments.forEach((c) => {
         historyEl.appendChild(createListElement(c));
-        console.log("new element heree");
     });
     });
   } // need to display more elements than currently are shown
@@ -142,4 +141,36 @@ function deleteCommentSection() {
       console.log('eyoo');
   });
   console.log("hellooo");
+}
+
+/** 
+ * This function is run every time the page reloads.
+ * First, it gets the comment section (with no comment limit)
+*/
+function reloadPage() {
+    getCommentSection(-1);
+    toggle_comment_visibility();
+}
+
+function toggle_comment_visibility() {
+    fetch('/login').then(response => response.json()).then((comments) => {
+      console.log("in the toggle");
+      console.log(comments);
+      console.log(comments.loginStatus);
+      loginEl = document.getElementById("login");
+      addCommentEl = document.getElementById("leave-comment-form");
+      if (comments.loginStatus == 'true') {
+        addCommentEl.style.display = 'block';
+        console.log("logged in");
+        console.log(loginEl);
+        document.getElementById("login-warning").innerHTML = comments.loginHTML;
+      } 
+      else if (comments.loginStatus == 'false') {
+        addCommentEl.style.display = 'none';
+        console.log("not logged in");
+        console.log(comments.loginHTML);
+        addCommentEl.appendChild(document.createTextNode(comments.loginHTML));
+        document.getElementById("login-warning").innerHTML = comments.loginHTML;
+      }
+    });
 }
