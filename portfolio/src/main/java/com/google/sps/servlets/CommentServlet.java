@@ -22,19 +22,18 @@ public final class CommentServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    if (msgHistory.size() == 0) {
-        Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        PreparedQuery results = datastore.prepare(query);
+    ArrayList<String> msg = new ArrayList<String>();
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
 
-        for (Entity entity : results.asIterable()) {
-            String txt = (String) entity.getProperty("comment");
-            msgHistory.add(txt);
-        }
+    for (Entity entity : results.asIterable()) {
+        String txt = (String) entity.getProperty("comment");
+        msg.add(txt);
     }
 
     response.setContentType("application/json");
-    String returnString = convertToJson(msgHistory);
+    String returnString = convertToJson(msg);
     response.getWriter().println(returnString);
 
   }
@@ -53,8 +52,6 @@ public final class CommentServlet extends HttpServlet {
     } else {
         commentString = "Anonymous: " + commentString;
     }
-
-    msgHistory.add(commentString);
 
     // Create entity and store in Datastore
     long timestamp = System.currentTimeMillis();

@@ -65,9 +65,12 @@ function createList(element, array) {
 
 /**
  * Fetches the current state of the comment section and builds the UI.
- * NEW: Also accounts for the number of comments that the user wants to??? 
+ * NEW: Also accounts for the number of comments that the user wants to.
  */
 function getCommentSection(numComments) {
+  console.log('jus testin');
+  console.log(numComments);
+
   const historyEl = document.getElementById('comment-history');
 
   // invalid case
@@ -77,10 +80,16 @@ function getCommentSection(numComments) {
   
   // -1 means display all comments
   if (numComments == -1) {
+    // clean out all previous elements
+    while (historyEl.childElementCount > 0) {
+        historyEl.lastChild.remove();
+    }
+
     fetch('/comment-section').then(response => response.json()).then((comments) => {
     const historyEl = document.getElementById('comment-history');
     comments.comments.forEach((c) => {
         historyEl.appendChild(createListElement(c));
+        console.log("new element heree");
     });
     });
   } // need to display more elements than currently are shown
@@ -118,4 +127,22 @@ function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
+}
+
+/**
+ * Deletes all comments in datastore by calling the relevant servlet.
+ */
+function deleteCommentSection() {
+  const request = new Request('/delete-comment',{method: 'POST'});
+  fetch('/delete-comment', {method: 'POST', body: '{"foo": "bar"}'}).then(response => {
+        if (!response.ok){
+            throw new Error('Network response was not ok.');
+        }
+    }).catch((err) => {
+    	console.log(err);
+    })
+  fetch(request).then(response => response.json()).then((comments) => {
+      console.log('eyoo');
+  });
+  console.log("hellooo");
 }
