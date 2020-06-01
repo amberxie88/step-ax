@@ -68,9 +68,6 @@ function createList(element, array) {
  * NEW: Also accounts for the number of comments that the user wants to.
  */
 function getCommentSection(numComments) {
-  console.log('jus testin');
-  console.log(numComments);
-
   const historyEl = document.getElementById('comment-history');
 
   // invalid case

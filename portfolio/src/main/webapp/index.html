@@ -109,37 +109,51 @@
     </div>
       
      <div id="random-content"> 
-      <h2 id="random">Random Fun</h2>
-      <p>Want a random (techy) movie suggestion?</p>
-      <button onclick="addRandomGreeting()">Click me!</button>
-      <div id="greeting-container"></div>
-
-      <button onclick="getHelloAsync()">Fetch some cool colors!</button>
+        <h2 id="random">Random Fun</h2>
+        <div id="fun-button-container">
+        <h3>Some Fun Buttons</h3>
+        <p>Want a random (techy) movie suggestion?</p>
+        <button onclick="addRandomGreeting()">Click me!</button>
+        <div id="greeting-container"></div>
+        <p>Go to /data to see where the fetch is coming from.</p>
+        <button onclick="getHelloAsync()">Fetch some cool colors!</button>
+      <br>
       <div id="hello-container"></div>
-
-        <h1>Comment Section</h1>
-        <p>Questions? Comments? Thoughts? Stories? Leave a comment below and I'll be sure to read it.<p>
-        <ul id="comment-history"></ul>
-
-      <div id= "comments">
-        <form action="/comment-section" method="POST">
-        
-        <p>Name:</p>
-        <input type="text" name="name-input" value="Name">
-
-        <p>Comment field:</p>
-        <input type="text" name="comment-input" value="Leave me a comment!">
-        <br/><br/>
-
-        <input type="submit" />
-        </form>
-        <label for="quantity">Number of Comments Shown:</label>
-        <input onChange="getCommentSection(this.value)" type="number" id="quantity" name="quantity" min="1" max="25">
-        <form action = "/delete-comment" method="POST">
-        <input type="text" name="temp-password" value="Enter Password">
-        <input type="submit" />
-        </form>
       </div>
+
+      <div id="comment-container">
+          <h3>Message Board</h3>
+          <ul id="comment-history">
+              <li>Loading comments...</li>
+          </ul>
+      </div>
+
+      
+        <div id="comment-settings-container">
+            <h3>Toggle Message Board Settings</h3>
+            <div id="comment-settings">
+                <label for="quantity">Number of Comments Shown:</label>
+                <input onChange="getCommentSection(this.value)" type="number" id="quantity" name="quantity" min="1" max="25">
+                <form action = "/delete-comment" method="POST">
+                <p>Delete all comments: </p>
+                <input type="text" name="temp-password" value="Enter Password">
+                <input type="submit" />
+            </div>
+        </div>
+        
+        <div id= "leave-comment">
+            <form action="/comment-section" method="POST">
+            <h3>Add a Message</h3>
+            <p>Name:</p>
+            <input type="text" name="name-input" value="Name">
+
+            <p>Comment field:</p>
+            <input type="text" name="comment-input" value="Leave me a comment!">
+            <br/><br/>
+
+            <input type="submit" />
+            </form>
+        </div>
     </div>
     </div>
   </body>

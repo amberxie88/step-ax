@@ -18,7 +18,8 @@
   --body-B: #f3e6be;
   --body-C: #f5a883;
   --body-D: #CE7950;
-
+  --random-A: #b7c06f;
+  --random-B: #5B7E9F;
 }
 
 /* Font */
@@ -148,9 +149,6 @@ h1, h2, h3, p {
     display:flex;
 }
 
-#nav-container {
-}
-
 .pic {
   position: relative;
   text-align: center;
@@ -166,4 +164,60 @@ h1, h2, h3, p {
 img {
     max-width: 100%;
     border-radius: 5%;
+}
+
+input[type=submit] {
+    background-color: #86360F;
+    border: none;
+    color: white;
+}
+
+input[type=submit]:hover{
+    background-color: #AA562D;
+}
+
+#comment-container{
+    background-color: var(--random-A);
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 15px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#comment-container h3 {
+    margin-left: 5px
+}
+
+#comment-container li {
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+
+#comment-settings-container {
+    background-color: var(--random-A);
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 15px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#leave-comment {
+    background-color: var(--body-C);
+    padding: 5px;
+    padding-left:15px !important;
+    padding-bottom: 10px !important;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: #86360F;
+    border: none;
+    color: white;
+}
+
+.button:hover{
+    background-color: #AA562D;
 }
