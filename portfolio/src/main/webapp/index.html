@@ -3,16 +3,140 @@
   <head>
     <meta charset="UTF-8">
     <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,700&family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
+  <body onload="getCommentSection(-1)">
+      <nav id="navbar">
+              <h1 id="nav-title">My Portfolio</h1>
+          <div class="nav-items">
+              <ul>
+                  <li class="nav-link">
+                      <a class="nav-a" href="#about-content">About Me</a>
+                  </li>
+                  <li class="nav-link">
+                      <a class="nav-a" href="#project-content">My Projects</a>
+                  </li>
+                  <li class="nav-link">
+                      <a class="nav-a" href="#gallery-content">Pictures</a>
+                  </li>
+                    <li class="nav-link">
+                      <a class="nav-a" href="#random-content">Random</a>
+                    </li>
+              </ul>
+          </div>
+        </nav>    
+
+    <div>
+    
+    <div id="about-content">
+      <h2>About Me</h2>
+      <div id="about-container">
+      <img src = "images/me.jpeg" width=25% height=inherit>
+      <div>
+      <p>I'm Amber Xie, a current sophomore at UC Berkeley studying Computer Science. I'm from the Bay Area, California, and my family comes from Inner Mongolia, a bilingual province in China.
+          While my relatives are about as Chinese now as I am American, they have always held on strongly to their Monglian heritage, and it's shaped the person I am and the dreams I have.
+      </p>
+      <p>I'm an avid programmer and problem-solver. Some of my favorite topics in the tech space include probability and free speech on the internet.
+          Outside of math and computer science, I really enjoy learning different languages. It gives me access to different forms of art: watching TV series in Spanish,
+          listening to music in French, Chinese, and Mongolian, and watching movies in Italian. Some things I like: Elite (Spanish teen thriller, great for picking up slang and swear words),
+          Angele (Belgian artist, socially conscious and excellent French music), il Capitale Umano (2014 Italian film, super interesting storytelling).
+      </p>
+      </div>
+      </div>
+      <p>Find me around the web!</p>
+      <a href="https://github.com/amberxie88"><img src="images/github.svg" height=30px></img></a>
+      <a href="https://www.linkedin.com/in/amber-xie-20ab8a118/"><img src="images/linkedin.png" height=30px></img></a>
+    </div>  
+
+    <div id="project-content">
+      <h2>Some Projects I've Worked on</h2>
+      <h3><a href="https://github.com/amberxie88/MusicAnalysis">Lyrical Statistics</a></h3>
+      <p>While music itself is freeform and artistic, there's a lot of science behind the music, lyrics, and what makes it work. I continued off on another Github repository's work on analyzing lyrical composition,
+        trying it out with some artists I've listened to. Still working on developing more features.
+      </p>
+
+      <h3><a href="https://eternalvirtualsunshine.weebly.com/project-3.html">Free Speech on the Internet</a></h3>
+      <p>This is a collection of papers and drafts I wrote for one of my favorite courses at Berkeley: college writing on technology and society. 
+          In a world where technology is prevalent, and especially as someone engaged in the tech space, it's important to recognize the effects it has on the world.
+          Mostly, it was just really fun and interesting to read deeply into a lot of issues that really fascinated me, such as the NBA / Daryl Morey / Hong Kong / China controversey.
+      </p>
+
+      <h3><a href="https://cs170.org/assets/project/spec.pdf">NP-Hard Algorithmic Problem</a></h3>
+      <p>Created a randomized algorithm to solve the provided NP-hard problem. The problem consists of finding a "spanning" tree that minimizes average pairwise distance. Caveat: 
+          the tree doesn't have to span all the vertices. As long as all vertices are in or have a neighbor in the tree, you're good. Implemented a gradient-descent algorithm in 
+          Python to find an approximately good solution for small, medium, and large inputs.
+      </p>
+    </div>
+     
+
+    <div id="gallery-content">
+      <h2>Some Cool Photos</h2>
+      <div class="gallery-img">
+        <div class="pic" onmouseover="addCaption('dc-txt', 'My high school\'s Competition Civics (We the People) team qualified for Nationals and placed 4th. Good times in D.C.')" onmouseout="remCaption('dc-txt')">
+          <img src="images/dc.jpg"></img>
+          <div class="txt" id="dc-txt"></div>
+        </div>
+      <div class="pic" onmouseover="addCaption('sagrada-txt', 'La Sagrada Familia. Colors are amazing, and no picture could capture its true beauty.')" onmouseout="remCaption('sagrada-txt')">
+          <img src="images/sagrada.jpg"></img>
+          <div class="txt" id="sagrada-txt"></div>
+        </div>
+        <div class="pic" onmouseover="addCaption('ub-txt', 'Mongolian ger (yurt) on the outskirts of Ulaanbaatar. They\'re everywhere, but this was the only one I got to visit.')" onmouseout="remCaption('ub-txt')">
+          <img src="images/ub.jpg"></img>
+          <div class="txt" id="ub-txt"></div>
+        </div>
+      </div>
+      
+      <div class="gallery-img">
+        <div class="pic" onmouseover="addCaption('cal-txt', 'View of Berkeley from the Campanile. Something about the warm glow of sunshine makes this one of my favorite Cal photos.')" onmouseout="remCaption('cal-txt')">
+          <img src="images/cal.jpg"></img>
+          <div class="txt" id="cal-txt"></div>
+        </div>
+        <div class="pic" onmouseover="addCaption('msg-txt', 'Madison Square Garden!!')" onmouseout="remCaption('msg-txt')">
+          <img src="images/msg.jpg"></img>
+          <div class="txt" id="msg-txt"></div>
+        </div>
+        <div class="pic" onmouseover="addCaption('bunny-txt', 'This is my bunny Prince Marshmellow. He likes eating flowers, apple leaves, and carrots.')" onmouseout="remCaption('bunny-txt')">
+          <img src="images/bunny.jpg"></img>
+          <div class="txt" id="bunny-txt"></div>
+        </div>
+       </div>
+
+    </div>
+      
+     <div id="random-content"> 
+      <h2 id="random">Random Fun</h2>
+      <p>Want a random (techy) movie suggestion?</p>
+      <button onclick="addRandomGreeting()">Click me!</button>
       <div id="greeting-container"></div>
+
+      <button onclick="getHelloAsync()">Fetch some cool colors!</button>
+      <div id="hello-container"></div>
+
+        <h1>Comment Section</h1>
+        <p>Questions? Comments? Thoughts? Stories? Leave a comment below and I'll be sure to read it.<p>
+        <ul id="comment-history"></ul>
+
+      <div id= "comments">
+        <form action="/comment-section" method="POST">
+        
+        <p>Name:</p>
+        <input type="text" name="name-input" value="Name">
+
+        <p>Comment field:</p>
+        <input type="text" name="comment-input" value="Leave me a comment!">
+        <br/><br/>
+
+        <input type="submit" />
+        </form>
+        <label for="quantity">Number of Comments Shown:</label>
+        <input onChange="getCommentSection(this.value)" type="number" id="quantity" name="quantity" min="1" max="25">
+      </div>
+    </div>
     </div>
   </body>
 </html>
