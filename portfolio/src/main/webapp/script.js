@@ -128,6 +128,7 @@ function createListElement(text) {
 /**
  * Deletes all comments in datastore by calling the relevant servlet.
  */
+ /*
 function deleteCommentSection() {
   const request = new Request('/delete-comment',{method: 'POST'});
   fetch('/delete-comment', {method: 'POST', body: '{"foo": "bar"}'}).then(response => {
@@ -142,6 +143,7 @@ function deleteCommentSection() {
   });
   console.log("hellooo");
 }
+*/
 
 /** 
  * This function is run every time the page reloads.

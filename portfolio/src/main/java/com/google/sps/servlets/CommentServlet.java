@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /** Servlet that takes care of commenting. */
 @WebServlet("/comment-section")
@@ -42,6 +44,10 @@ public final class CommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Join the username and message to create a String for the appropriate comment
+    long timestamp = System.currentTimeMillis();
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
+    Date resultdate = new Date(timestamp);
+
     String commentString = getParameter(request, "comment-input", "");
     String name = getParameter(request, "name-input", "");
     if (commentString.length() == 0) {
@@ -53,8 +59,9 @@ public final class CommentServlet extends HttpServlet {
         commentString = "Anonymous: " + commentString;
     }
 
+    commentString = "[" + sdf.format(resultdate) +"] " + commentString;
+
     // Create entity and store in Datastore
-    long timestamp = System.currentTimeMillis();
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment", commentString);
     commentEntity.setProperty("timestamp", timestamp);
