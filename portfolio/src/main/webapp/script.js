@@ -115,7 +115,6 @@ function getCommentSection(numComments) {
         historyEl.firstChild.remove();
     }
   } 
-  
 }
 
 /** Creates an <li> element containing text. */
@@ -152,27 +151,58 @@ function deleteCommentSection() {
 function reloadPage() {
     getCommentSection(-1);
     toggle_comment_visibility();
+    fetchBlobstoreUrlAndShowForm();
+    getImageUploads();
 }
 
 function toggle_comment_visibility() {
     fetch('/login').then(response => response.json()).then((comments) => {
-      console.log("in the toggle");
-      console.log(comments);
-      console.log(comments.loginStatus);
       loginEl = document.getElementById("login");
       addCommentEl = document.getElementById("leave-comment-form");
       if (comments.loginStatus == 'true') {
         addCommentEl.style.display = 'block';
-        console.log("logged in");
-        console.log(loginEl);
         document.getElementById("login-warning").innerHTML = comments.loginHTML;
       } 
       else if (comments.loginStatus == 'false') {
         addCommentEl.style.display = 'none';
-        console.log("not logged in");
-        console.log(comments.loginHTML);
         addCommentEl.appendChild(document.createTextNode(comments.loginHTML));
         document.getElementById("login-warning").innerHTML = comments.loginHTML;
       }
     });
+}
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+      .then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+        const messageForm = document.getElementById('my-form');
+        messageForm.action = imageUploadUrl;
+        console.log('in here');
+        //messageForm.classList.remove('hidden');
+      });
+}
+
+/**
+ * gets images
+ */
+function getImageUploads() {
+    // fetch all comments
+    fetch('/my-form-handler').then((response) => response.json()).then((imgs) => {
+      const imgEl = document.getElementById('img-placeholder');
+      imgEl.innerHTML = "";
+      imgs.images.forEach((img) => {
+        addImage(imgEl, img);
+    })});
+  
+}
+
+function addImage(element, img) {
+    var imageEl = document.createElement("img");
+    imageEl.src = img.url;
+    element.appendChild(imageEl);
+    var captionEl = document.createElement("p");
+    captionEl.innerText = img.message;
+    element.appendChild(captionEl);
 }
