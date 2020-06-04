@@ -37,12 +37,9 @@ public final class FindMeetingQuery {
 
     while (eventsList.size() > 0) {
         Event firstEvent = findNextEvent(eventsList, request, possibleStartTime);
-
         if (firstEvent != null) {
-            lastEndTime = eventsList.get(0).getWhen().end();
             if (firstEvent.getWhen().start() - possibleStartTime >= request.getDuration()) {
                 returnTimes.add(TimeRange.fromStartDuration(possibleStartTime, firstEvent.getWhen().start()-possibleStartTime));
-                TimeRange tr = TimeRange.fromStartDuration(possibleStartTime, firstEvent.getWhen().start()-possibleStartTime);
                 possibleStartTime = firstEvent.getWhen().end();
             } else {
                 possibleStartTime = firstEvent.getWhen().end();
@@ -58,6 +55,9 @@ public final class FindMeetingQuery {
     return returnTimes;
   }
 
+  /** 
+  * Finds the next relevant events and stores the last end time of the latest relevant event
+  */
   private Event findNextEvent(List<Event> eventsList, MeetingRequest request, int possibleStartTime) {
     Event firstEvent = eventsList.get(0);
     while (firstEvent.getWhen().start() < possibleStartTime || !relevantEvent(firstEvent, request)) {
