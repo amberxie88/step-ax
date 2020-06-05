@@ -57,6 +57,11 @@ public class FormHandlerServlet extends HttpServlet {
 
     String msg = "";
     ArrayList<Entity> imgList = new ArrayList<>();
+
+    for (Entity entity : results.asIterable()) {
+        imgList.add(entity);
+    }
+
     String json = convertToJSON(imgList);
     System.out.println();
     System.out.println(json);

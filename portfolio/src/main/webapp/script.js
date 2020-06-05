@@ -199,10 +199,21 @@ function getImageUploads() {
 }
 
 function addImage(element, img) {
+    var imageCaptionDiv = document.createElement("div");
+    imageCaptionDiv.classList.add("input-img-caption-div");
+    element.append(imageCaptionDiv);
+
+    var imageDiv = document.createElement("div");
+    imageDiv.classList.add("input-img-div");
+    imageCaptionDiv.append(imageDiv);
+
     var imageEl = document.createElement("img");
     imageEl.src = img.url;
-    element.appendChild(imageEl);
+    imageEl.classList.add("input-img");
+    console.log("adding img");
+    imageDiv.appendChild(imageEl);
+
     var captionEl = document.createElement("p");
     captionEl.innerText = img.message;
-    element.appendChild(captionEl);
+    imageCaptionDiv.appendChild(captionEl);
 }

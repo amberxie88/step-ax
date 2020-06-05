@@ -121,18 +121,6 @@
       <div id="hello-container"></div>
       </div>
 
-      <div id="upload-img">
-        <div id="img-placeholder"></div>
-        <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
-            <p>Type some text:</p>
-            <textarea name="message"></textarea>
-             <br/>
-             <p>Upload an image:</p>
-             <input type="file" name="image">
-             <br/><br/>
-             <button>Submit</button>
-       </form>
-    </div>
 
       <div id="comment-container">
           <h3>Message Board</h3>
@@ -171,6 +159,27 @@
             </div>
             <p id="login-warning">Loading authentification...</p>
         </div>
+
+        <div id="upload-img">
+        <div id="img-upload-gallery">
+            <h3>Image Board</h3>
+            <div id="img-placeholder">
+            <p>Loading...</p>
+            </div>
+        </div>
+        <div id="img-form-container">
+        <h3>Submit an Image</h3>
+        <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
+            <p>Type some text:</p>
+            <textarea name="message"></textarea>
+             <br/>
+             <p>Upload an image:</p>
+             <input type="file" name="image">
+             <br/><br/>
+             <button class="form-button">Submit</button>
+       </form>
+       </div>
+    </div>
     </div>
     </div>
   </body>
