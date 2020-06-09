@@ -89,7 +89,7 @@ h3 {
     font-size: 24px
 }
 
-p {
+p, label {
    font-family: 'Caladea', serif;
    font-size:14px;
 }

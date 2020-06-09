@@ -78,7 +78,7 @@
     <div id="gallery-content">
       <h2>Some Cool Photos</h2>
       <div class="gallery-img">
-        <div class="pic" onmouseover="addCaption('dc-txt', 'My high school\'s Competition Civics (We the People) team qualified for Nationals and placed 4th. Good times in D.C.')" onmouseout="remCaption('dc-txt')">
+        <div class="pic" onmouseover="addCaption('dc-txt', 'My high school\'s Competition Civics (We the People) team qualified for Nationals and placed 4th.')" onmouseout="remCaption('dc-txt')">
           <img src="images/dc.jpg"></img>
           <div class="txt" id="dc-txt"></div>
         </div>
@@ -86,7 +86,7 @@
           <img src="images/sagrada.jpg"></img>
           <div class="txt" id="sagrada-txt"></div>
         </div>
-        <div class="pic" onmouseover="addCaption('ub-txt', 'Mongolian ger (yurt) on the outskirts of Ulaanbaatar. They\'re everywhere, but this was the only one I got to visit.')" onmouseout="remCaption('ub-txt')">
+        <div class="pic" onmouseover="addCaption('ub-txt', 'Mongolian ger (yurt) on the outskirts of Ulaanbaatar.')" onmouseout="remCaption('ub-txt')">
           <img src="images/ub.jpg"></img>
           <div class="txt" id="ub-txt"></div>
         </div>
@@ -144,6 +144,18 @@
                   <input type="text" name="temp-password" value="Enter Password">
                   <input type="submit" />
                 </form>
+                <p>Language:</p>
+                <select id="language">
+                  <option value="en">English</option>
+                  <option value="zh">Chinese</option>
+                  <option value="es">Spanish</option>
+                  <option value="fr">French</option>
+                  <option value="it">Italian</option>
+                  <option value="pt">Portugeuse</option>
+                </select>
+                <button class="blueButton" onclick="translateComments();">Translate</button>
+                <div id="result"></div>
+
             </div>
         </div>
         <br>

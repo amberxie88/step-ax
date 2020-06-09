@@ -179,6 +179,19 @@ input[type=submit]:hover{
     background-color: #2F2B76;
 }
 
+.blueButton {
+    background-color: #1A165E;
+    border: none;
+    color: white;
+    font-family: 'Caladea', serif;
+    padding: 5px;
+    border-radius: 15%;
+}
+
+.blueButton:hover{
+    background-color: #2F2B76;
+}
+
 .form-button {
     background-color: #1A165E;
     border: none;

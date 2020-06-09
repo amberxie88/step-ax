@@ -221,3 +221,29 @@ function addImage(element, img) {
 }
 
 
+
+function requestTranslation(comment) {
+    const text = comment.innerText;
+    const languageCode = document.getElementById('language').value;
+
+    const params = new URLSearchParams();
+    params.append('text', text);
+    params.append('languageCode', languageCode);
+
+    fetch('/translate', {
+        method: 'POST',
+        body: params
+    }).then(response => response.text())
+    .then((translatedMessage) => {
+        comment.innerText = translatedMessage;
+    });
+}
+
+function translateComments() {
+    const commentList = document.getElementById('comment-history');
+    var children = commentList.children;
+    for (var i = 0; i < children.length; i++) {
+        var comment = children[i];
+        requestTranslation(comment);
+    }
+}
