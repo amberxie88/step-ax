@@ -56,19 +56,24 @@ function drawMusic() {
 
 /** Fetches bigfoot sightings data and uses it to create a chart. */
 async function drawMusic(property, propertyString) {
-    var queryString = '/music-data?property=' + property;
-    const response = await fetch(queryString);
+    var queryString = '/music-data-18?property=' + property;
+    const response18 = await fetch(queryString);
+    const musicData18 = await response18.json();
 
-    const musicData = await response.json();
+    var queryString = '/music-data-17?property=' + property;
+    const response17 = await fetch(queryString);
+    const musicData17 = await response17.json();
+
     const data1 = new google.visualization.DataTable();
     data1.addColumn('string', 'Most Played Track');
-    data1.addColumn('number', propertyString);
-    Object.keys(musicData).forEach((year) => {
-      data1.addRow([year, musicData[year]]);
+    data1.addColumn('number', '2017');
+    data1.addColumn('number', '2018');
+    Object.keys(musicData17).forEach((rank) => {
+      data1.addRow([rank, musicData17[rank], musicData18[rank]]);
     });
 
     const options = {
-      'title': 'Top 100 tracks by ' + propertyString,
+      'title': propertyString + ' of the Top 100 Tracks',
       'width':600,
       'height':500
     };

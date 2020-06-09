@@ -26,14 +26,14 @@ import javax.servlet.http.HttpServletResponse;
 /* data: https://www.kaggle.com/nadintamer/top-tracks-of-2017/data
  * id,name,artists,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,duration_ms,time_signature
 */
-@WebServlet("/music-data-17")
-public class MusicDataServlet extends HttpServlet {
+@WebServlet("/music-data-18")
+public class MusicNewDataServlet extends HttpServlet {
 
   private LinkedHashMap<Integer, Float> bigfootSightings = new LinkedHashMap<>();
 
   public void setUpData(int property) {
     Scanner scanner = new Scanner(getServletContext().getResourceAsStream(
-        "/WEB-INF/2017toptracks.csv"));
+        "/WEB-INF/2018toptracks.csv"));
     int i = 0;
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
