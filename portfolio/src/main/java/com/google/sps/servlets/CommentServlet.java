@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.google.gson.Gson;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.sps.data.Comment;
 
 /** Servlet that takes care of commenting. */
 @WebServlet("/comment-section")
@@ -24,18 +28,23 @@ public final class CommentServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> msg = new ArrayList<String>();
+    ArrayList<Comment> msg = new ArrayList<Comment>();
     Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
-        String txt = (String) entity.getProperty("comment");
-        msg.add(txt);
+        long timestamp = (long) entity.getProperty("timestamp");
+        String content = (String) entity.getProperty("comment");
+        String email = (String) entity.getProperty("email");
+        String username = (String) entity.getProperty("name");
+        Comment c = new Comment(timestamp, content, email, username);
+        msg.add(c);
     }
 
     response.setContentType("application/json");
-    String returnString = convertToJson(msg);
+    //String returnString = convertToJson(msg);
+    String returnString = new Gson().toJson(msg);
     response.getWriter().println(returnString);
 
   }
@@ -43,34 +52,26 @@ public final class CommentServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Join the username and message to create a String for the appropriate comment
+    // Get some data
     long timestamp = System.currentTimeMillis();
-    SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm");
-    Date resultdate = new Date(timestamp);
-
     String commentString = getParameter(request, "comment-input", "");
     String name = getParameter(request, "name-input", "");
-    if (commentString.length() == 0) {
-        return;
-    }
-    if (name.length() > 0) {
-        commentString = name + ": " + commentString;
-    } else {
-        commentString = "Anonymous: " + commentString;
-    }
 
-    commentString = "[" + sdf.format(resultdate) +"] " + commentString;
-
+    UserService userService = UserServiceFactory.getUserService();
+    String email = userService.getCurrentUser().getEmail();
+    
     // Create entity and store in Datastore
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("comment", commentString);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("name", name);
+    commentEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     // Redirect back to the HTML page.
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/random.html");
   }
 
   /**

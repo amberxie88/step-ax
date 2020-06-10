@@ -11,22 +11,16 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="reloadPage()">
+  <body>
       <nav id="navbar">
               <h1 id="nav-title">My Portfolio</h1>
           <div class="nav-items">
               <ul>
-                  <li class="nav-link">
-                      <a class="nav-a" href="#about-content">About Me</a>
-                  </li>
-                  <li class="nav-link">
-                      <a class="nav-a" href="#project-content">My Projects</a>
-                  </li>
-                  <li class="nav-link">
-                      <a class="nav-a" href="#gallery-content">Pictures</a>
-                  </li>
                     <li class="nav-link">
-                      <a class="nav-a" href="#random-content">Random</a>
+                        <a class="nav-a" href="data.html">Data Analysis</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-a" href="random.html">Message Board</a>
                     </li>
               </ul>
           </div>
@@ -44,7 +38,7 @@
       </p>
       <p>I'm an avid programmer and problem-solver. Some of my favorite topics in the tech space include probability and free speech on the internet.
           Outside of math and computer science, I really enjoy learning different languages. It gives me access to different forms of art: watching TV series in Spanish,
-          listening to music in French, Chinese, and Mongolian, and watching movies in Italian. Some things I like: Elite (Spanish teen thriller, great for picking up slang and swear words),
+          listening to music in French, Chinese, and Mongolian, and watching movies in Italian. Some things I like: Elite (Spanish teen thriller, great for picking up slang),
           Angele (Belgian artist, socially conscious and excellent French music), il Capitale Umano (2014 Italian film, super interesting storytelling).
       </p>
       </div>
@@ -110,93 +104,19 @@
     </div>
       
      <div id="random-content"> 
-        <h2 id="random">Random Fun</h2>
-        <div id="fun-button-container">
-        <h3>Some Fun Buttons</h3>
-        <p>Want a random (techy) movie suggestion?</p>
-        <button onclick="addRandomGreeting()">Click me!</button>
-        <div id="greeting-container"></div>
-        <p>Go to /data to see where the fetch is coming from.</p>
-        <button onclick="getHelloAsync()">Fetch some cool colors!</button>
-      <br>
-        <p>Look at some graphs and charts </p>
-        <a href="data.html"><button>Check out some data!</button></a>
-
-      <div id="hello-container"></div>
-      </div>
-
-
-      <div id="comment-container">
-          <h3>Message Board</h3>
-          <ul id="comment-history">
-              <li>Loading comments...</li>
-          </ul>
-      </div>
-
-      
-        <div id="comment-settings-container">
-            <h3>Toggle Message Board Settings</h3>
-            <div id="comment-settings">
-                <label for="quantity">Number of Comments Shown:</label>
-                <input onChange="getCommentSection(this.value)" type="number" id="quantity" name="quantity" min="1" max="25">
-                <form action = "/delete-comment" method="POST">
-                  <p>Delete all comments: </p>
-                  <input type="text" name="temp-password" value="Enter Password">
-                  <input type="submit" />
-                </form>
-                <p>Language:</p>
-                <select id="language">
-                  <option value="en">English</option>
-                  <option value="zh">Chinese</option>
-                  <option value="es">Spanish</option>
-                  <option value="fr">French</option>
-                  <option value="it">Italian</option>
-                  <option value="pt">Portugeuse</option>
-                </select>
-                <button class="blueButton" onclick="translateComments();">Translate</button>
-                <div id="result"></div>
-
+            <div id="container">
+                <h2 id="random">Random Fun</h2>
+                <div id="fun-button-container"></div>
+                <h3>Some Fun Buttons</h3>
+                <p>Want a random (techy) movie suggestion?</p>
+                <button onclick="addRandomGreeting()">Click me!</button>
+                <div id="greeting-container"></div>
+                <p>Go to /data to see where the fetch is coming from.</p>
+                <button onclick="getHelloAsync()">Fetch some cool colors!</button>
+                <div id="hello-container"></div>
             </div>
-        </div>
-        <br>
-        <div id="leave-comment">
-            <div id="leave-comment-form">
-                <form action="/comment-section" method="POST">
-                <h3>Add a Message</h3>
-                <p>Name:</p>
-                <input type="text" name="name-input" value="Name">
-
-                <p>Comment field:</p>
-                <input type="text" name="comment-input" value="Leave me a comment!">
-                <br/><br/>
-
-                <input type="submit" />
-                </form>
-            </div>
-            <p id="login-warning">Loading authentification...</p>
-        </div>
-
-        <div id="upload-img">
-        <div id="img-upload-gallery">
-            <h3>Image Board</h3>
-            <div id="img-placeholder">
-            <p>Loading...</p>
-            </div>
-        </div>
-        <div id="img-form-container">
-        <h3>Submit an Image</h3>
-        <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
-            <p>Type some text:</p>
-            <textarea name="message"></textarea>
-             <br/>
-             <p>Upload an image:</p>
-             <input type="file" name="image">
-             <br/><br/>
-             <button class="form-button">Submit</button>
-       </form>
-       </div>
     </div>
-    </div>
+    
     </div>
   </body>
 </html>
