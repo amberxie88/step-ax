@@ -66,13 +66,13 @@ public class LoginServlet extends HttpServlet {
       if (status) { 
         // If you are logged in and want a logout URL
         String userEmail = userService.getCurrentUser().getEmail();
-        String urlToRedirectToAfterUserLogsOut = "/";
+        String urlToRedirectToAfterUserLogsOut = "/random.html";
         String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
         loginHTML += "<p>Hello " + userEmail + "!</p>";
         loginHTML += "<p>Logout <a href=\\\"" + logoutUrl + "\\\">here</a>.</p>";
       } else { 
         // If you are logged out and want a login URL
-        String urlToRedirectToAfterUserLogsIn = "/";
+        String urlToRedirectToAfterUserLogsIn = "/random.html";
         String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
         loginHTML += "<p>Hello stranger.</p>";
         loginHTML += "<p>Login <a href=\\\"" + loginUrl + "\\\">here</a>.</p>";

@@ -302,6 +302,9 @@ button:hover{
 .single-comment-meta-text {
     margin-right: 10px;
     color: var(--random-A);
+    font-family: 'Caladea', serif;
+    font-size: 14px;
+    padding-top: 15px;
 }
 
 .single-comment-div {

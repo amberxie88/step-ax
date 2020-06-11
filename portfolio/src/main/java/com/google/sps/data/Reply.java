@@ -1,24 +1,26 @@
 package com.google.sps.data;
 
 /**
- * Class representing a comment.
+ * Class representing a reply.
  *
- * <p>Note: The private variables in this class are converted into JSON.
+ * Future: combine this with Comment to avoid redundancy. 
  */
-public class Comment {
+public class Reply {
 
   private long timestamp;
   private long id;
   private String content;
   private String email;
   private String username;
+  private long parentID;
 
-  public Comment(long timestamp, long id, String content, String email, String username) {
+  public Reply(long timestamp, long id, String content, String email, String username, long parentID) {
     this.timestamp = timestamp;
     this.id = id;
     this.content = content;
     this.email = email;
     this.username = username;
+    this.parentID = parentID;
   }
 
 
