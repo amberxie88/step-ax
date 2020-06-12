@@ -23,28 +23,6 @@ function reloadPage() {
     getImageUploads();
 }
 
-function addCaption(id, txt) {
-  const txtContainer = document.getElementById(id);
-  txtContainer.innerText = txt;
-  txtContainer.style.background = "rgba(100, 149, 237, 0.7)";
-  txtContainer.style.borderRadius = "10px";
-}
-
-function remCaption(id) {
-  const txtContainer = document.getElementById(id);
-  txtContainer.innerText = "";
-  txtContainer.style.backgroundColor = "rgba(0,0,0,0)";
-}
-
-
-function createList(element, array) {
-    array.forEach(item => {
-        const liElement = document.createElement('li');
-        liElement.innerText = item;
-        element.appendChild(liElement);
-    });
-}
-
 /**
  * Fetches the current state of the comment section and builds the UI.
  * NEW: Also accounts for the number of comments that the user wants to.
@@ -83,7 +61,29 @@ function createComment(historyEl, c) {
 
     var metaDiv = document.createElement("div");
     metaDiv.classList.add("single-comment-meta-div");
-    commentDiv.append(metaDiv); // make this flex later ? 
+    commentDiv.append(metaDiv);
+
+    var numLikes = document.createElement("p");
+    numLikes.classList.add("single-comment-meta-text");
+    numLikesStr = getNumLikes(c.likers) + " Likes";
+    numLikes.innerText = numLikesStr;
+    metaDiv.append(numLikes);
+
+    var likeLink = document.createElement("a");
+    likeLink.classList.add("single-comment-meta-text");
+    likeStatus = getLikeStatus(c.likers, c.email);
+    likeLink.innerText = likeStatus;
+    likeLink.href = "#";
+    likeLink.onclick = function(){likeComment(c.id)};
+    metaDiv.append(likeLink);
+
+    var replyLink = document.createElement("a");
+    replyLink.classList.add("single-comment-meta-text");
+    replyLink.innerText = 'Reply';
+    replyLink.href = "#";
+    replyLink.onclick = function(){openReply(c.id)};
+    metaDiv.append(replyLink);
+
 
     var email = document.createElement("p");
     email.classList.add("single-comment-meta-text");
@@ -94,13 +94,6 @@ function createComment(historyEl, c) {
     time.classList.add("single-comment-meta-text");
     time.innerText = date;
     metaDiv.append(time);
-
-    var replyLink = document.createElement("a");
-    replyLink.classList.add("single-comment-meta-text");
-    replyLink.innerText = 'Reply';
-    replyLink.href = "#";
-    replyLink.onclick = function(){openReply(c.id)};
-    metaDiv.append(replyLink);
 
     var replyDiv = document.createElement("div");
     replyDiv.classList.add("single-comment-reply-div");
@@ -113,11 +106,21 @@ function createComment(historyEl, c) {
     commentDiv.append(threadDiv);
 }
 
-/** Creates an <li> element containing text. */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+function getNumLikes(likers) {
+    var counter = 0;
+    for (var i = 0; i < likers.length; i++) {
+        if ("," === likers[i]) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getLikeStatus(likers, email) {
+    if (likers.indexOf(email) !== -1) {
+        return 'You Liked This';
+    }
+    return 'Like';
 }
 
 function toggle_comment_visibility() {
@@ -205,8 +208,17 @@ function translateComments() {
     var children = commentList.children;
     for (var i = 0; i < children.length; i++) {
         var comment = children[i];
+        var possibleReplies = comment.firstElementChild.children[4];
+        console.log(possibleReplies.children.length);
+        for (var j = 0; j < possibleReplies.children.length; j++) {
+            translateReply(possibleReplies.children[j]);
+        }
         requestTranslation(comment.firstElementChild.children[1]);
     }
+}
+
+function translateReply(element) {
+    requestTranslation(element.children[1]);
 }
 
 function openReply(input) {
@@ -214,14 +226,11 @@ function openReply(input) {
     replyDiv = document.getElementById("reply-" + input)
     if(addCommentEl.style.display == 'none') {
         alert("Please log in before replying");
-    } else {
-        console.log('okee cool');
-        var leaveComment = document.getElementById('leave-comment-form');
-        var clone = leaveComment.cloneNode(true);
-        clone.id = 'leave-comment-form-' + input;
-        var testerNode = document.getElementById('good');
+    } else if (replyDiv.children.length == 0) {
         createForm(replyDiv, input);
-        //replyDiv.append(clone);
+    } else {
+        formEl = document.getElementById("form-" + input);
+        formEl.parentNode.removeChild(formEl);
     }
 }
 
@@ -229,6 +238,7 @@ function createForm(replyDiv, input) {
     var f = document.createElement("form");
     f.setAttribute('method',"post");
     f.setAttribute('action',"/reply-section?id=" + input);
+    f.id = "form-" + input;
 
     var heading = document.createElement("h3");
     heading.innerText = "Reply";
@@ -297,7 +307,15 @@ function createReply(r) {
 
     var metaDiv = document.createElement("div");
     metaDiv.classList.add("single-comment-meta-div");
-    commentDiv.append(metaDiv); // make this flex later ? 
+    commentDiv.append(metaDiv);
+
+    /*
+    var likeLink = document.createElement("a");
+    likeLink.classList.add("single-comment-meta-text");
+    likeLink.innerText = 'Like';
+    likeLink.href = "#";
+    likeLink.onclick = function(){likeComment(r.id)};
+    metaDiv.append(likeLink);*/
 
     var email = document.createElement("p");
     email.classList.add("single-comment-meta-text");
@@ -308,4 +326,16 @@ function createReply(r) {
     time.classList.add("single-comment-meta-text");
     time.innerText = date;
     metaDiv.append(time);
+}
+
+async function likeComment(input) {
+    // Send POST request
+    const params = new URLSearchParams();
+    params.append('id', input);
+    
+    const request = new Request('/like-comment', {method: 'POST', body: params});
+    const response = await fetch(request);
+    console.log("Finished");
+    reloadPage();
+    return;
 }

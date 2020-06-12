@@ -12,13 +12,15 @@ public class Comment {
   private String content;
   private String email;
   private String username;
+  private String likers;
 
-  public Comment(long timestamp, long id, String content, String email, String username) {
+  public Comment(long timestamp, long id, String content, String email, String username, String likers) {
     this.timestamp = timestamp;
     this.id = id;
     this.content = content;
     this.email = email;
     this.username = username;
+    this.likers = likers;
   }
 
 
