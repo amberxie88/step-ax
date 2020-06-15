@@ -56,14 +56,6 @@ public final class LikeServlet extends HttpServlet {
 
     UserService userService = UserServiceFactory.getUserService();
     String email = userService.getCurrentUser().getEmail(); // which user is liking the comment
-    
-    
-
-    // Create entity and store in Datastore
-    //Entity commentEntity = new Entity("Like");
-    //commentEntity.setProperty("comment", id);
-    // add something? 
-    // commentEntity.setProperty("email", email);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Key idKey = KeyFactory.createKey("Comment", id);
@@ -79,11 +71,7 @@ public final class LikeServlet extends HttpServlet {
     } catch (Exception e) {
         System.out.println("Error getting the comment :(");
     }
-
-    //datastore.put(commentEntity);
-
-    //KeyFactory.createKey("Like", id);
-
+    
     // Redirect back to the HTML page.
     response.sendRedirect("/random.html");
   }

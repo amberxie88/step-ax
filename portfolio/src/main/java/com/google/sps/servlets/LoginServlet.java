@@ -35,23 +35,23 @@ public class LoginServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsOut = "/";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-      String responseJSON = convertToJSON(userService, true);
+      String responseJSON = convertToJSON(userService, true, userEmail);
       response.getWriter().println(responseJSON);
       //response.getWriter().println("<p>Hello " + userEmail + "!</p>");
       //response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
     } else {
-      String urlToRedirectToAfterUserLogsIn = "/";
+      String urlToRedirectToAfterUserLogsIn = "/random.html";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-      String responseJSON = convertToJSON(userService, false);
+      String responseJSON = convertToJSON(userService, false, "notloggedin@notloggedin.com");
       response.getWriter().println(responseJSON);
       //response.getWriter().println("<p>Hello stranger.</p>");
       //response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
     }
   }
 
-  private String convertToJSON(UserService userService, boolean status) {
-      String responseJSON = "{" + formatLoginStatus(status) + ", " + formatLoginHTML(userService, status) + "}";
+  private String convertToJSON(UserService userService, boolean status, String userEmail) {
+      String responseJSON = "{" + "\"email\": \"" + userEmail + "\"," + formatLoginStatus(status) + ", " + formatLoginHTML(userService, status) + "}";
       return responseJSON;
   }
 

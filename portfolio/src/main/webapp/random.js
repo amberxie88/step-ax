@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+var userLoggedIn = "notloggedin@notloggedin.com"
+
 /** 
  * This function is run every time the page reloads.
  * First, it gets the comment section (with no comment limit)
@@ -71,7 +73,8 @@ function createComment(historyEl, c) {
 
     var likeLink = document.createElement("a");
     likeLink.classList.add("single-comment-meta-text");
-    likeStatus = getLikeStatus(c.likers, c.email);
+    likeLink.id = 'like-' + c.id;
+    likeStatus = getLikeStatus(c.likers, 'like-' + c.id); // fix this to include fetch or some sort of await
     likeLink.innerText = likeStatus;
     likeLink.href = "#";
     likeLink.onclick = function(){likeComment(c.id)};
@@ -116,17 +119,34 @@ function getNumLikes(likers) {
     return counter;
 }
 
-function getLikeStatus(likers, email) {
-    if (likers.indexOf(email) !== -1) {
+function getLikeStatus(likers, id) {
+    var email = "aa";
+    // get the email of the user currently logged in
+    getUserLoggedIn().then(email => { 
+        if (likers.indexOf(email) !== -1) {
+            var likeButton = document.getElementById(id);
+            likeButton.innerText = 'You Liked This';
+        }
+    });
+    return 'Like';
+    //document.getElementById('quote-container').innerText = quote;
+    /*if (likers.indexOf(email) !== -1) {
         return 'You Liked This';
     }
-    return 'Like';
+    return 'Like';*/
+}
+
+async function getUserLoggedIn() {
+    const response = await fetch('/login');
+    const quote = await response.json();
+    return quote.email;
 }
 
 function toggle_comment_visibility() {
     fetch('/login').then(response => response.json()).then((comments) => {
       loginEl = document.getElementById("login");
       addCommentEl = document.getElementById("leave-comment-form");
+      userLoggedIn = comments.email;
       if (comments.loginStatus == 'true') {
         addCommentEl.style.display = 'block';
         document.getElementById("login-warning").innerHTML = comments.loginHTML;
@@ -147,7 +167,6 @@ function fetchBlobstoreUrlAndShowForm() {
       .then((imageUploadUrl) => {
         const messageForm = document.getElementById('my-form');
         messageForm.action = imageUploadUrl;
-        //messageForm.classList.remove('hidden');
       });
 }
 
@@ -183,8 +202,6 @@ function addImage(element, img) {
     captionEl.innerText = img.message;
     imageCaptionDiv.appendChild(captionEl);
 }
-
-
 
 function requestTranslation(comment) {
     const text = comment.innerText;
