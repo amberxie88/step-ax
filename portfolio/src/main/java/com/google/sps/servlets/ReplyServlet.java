@@ -18,36 +18,29 @@ import java.util.Date;
 import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.sps.data.Comment;
+import com.google.sps.data.Reply;
 
 /** Servlet that takes care of commenting. */
-@WebServlet("/comment-section")
-public final class CommentServlet extends HttpServlet {
+@WebServlet("/reply-section")
+public final class ReplyServlet extends HttpServlet {
 
   private static ArrayList<String> msgHistory = new ArrayList<String>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<Comment> msg = new ArrayList<Comment>();
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    ArrayList<Reply> msg = new ArrayList<Reply>();
+    Query query = new Query("Reply").addSort("timestamp", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-    int numComments = Integer.parseInt(request.getParameter("numComments"));
 
-    int counter = 0;
-    for (Entity entity: results.asIterable()) {
-        if (counter == numComments) {
-            break;
-        }
-        counter++;
-
+    for (Entity entity : results.asIterable()) {
         long timestamp = (long) entity.getProperty("timestamp");
         long id = entity.getKey().getId();
         String content = (String) entity.getProperty("comment");
         String email = (String) entity.getProperty("email");
         String username = (String) entity.getProperty("name");
-        String likers = (String) entity.getProperty("likers");
-        Comment c = new Comment(timestamp, id, content, email, username, likers);
+        long parentID = (long) entity.getProperty("parentID");
+        Reply c = new Reply(timestamp, id, content, email, username, parentID);
         msg.add(c);
     }
 
@@ -63,6 +56,7 @@ public final class CommentServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get some data
     long timestamp = System.currentTimeMillis();
+    long parentID = Long.parseLong(getParameter(request, "id", "-1"));
     String commentString = getParameter(request, "comment-input", "");
     String name = getParameter(request, "name-input", "");
 
@@ -70,12 +64,12 @@ public final class CommentServlet extends HttpServlet {
     String email = userService.getCurrentUser().getEmail();
     
     // Create entity and store in Datastore
-    Entity commentEntity = new Entity("Comment");
+    Entity commentEntity = new Entity("Reply");
     commentEntity.setProperty("comment", commentString);
     commentEntity.setProperty("timestamp", timestamp);
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("email", email);
-    commentEntity.setProperty("likers", ""); 
+    commentEntity.setProperty("parentID", parentID);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);

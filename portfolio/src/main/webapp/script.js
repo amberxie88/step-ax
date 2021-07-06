@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+
 /**
  * Adds a random greeting to the page.
  */
@@ -68,9 +70,6 @@ function createList(element, array) {
  * NEW: Also accounts for the number of comments that the user wants to.
  */
 function getCommentSection(numComments) {
-  console.log('jus testin');
-  console.log(numComments);
-
   const historyEl = document.getElementById('comment-history');
 
   // invalid case
@@ -89,7 +88,6 @@ function getCommentSection(numComments) {
     const historyEl = document.getElementById('comment-history');
     comments.comments.forEach((c) => {
         historyEl.appendChild(createListElement(c));
-        console.log("new element heree");
     });
     });
   } // need to display more elements than currently are shown
@@ -119,7 +117,6 @@ function getCommentSection(numComments) {
         historyEl.firstChild.remove();
     }
   } 
-  
 }
 
 /** Creates an <li> element containing text. */
@@ -132,6 +129,7 @@ function createListElement(text) {
 /**
  * Deletes all comments in datastore by calling the relevant servlet.
  */
+ /*
 function deleteCommentSection() {
   const request = new Request('/delete-comment',{method: 'POST'});
   fetch('/delete-comment', {method: 'POST', body: '{"foo": "bar"}'}).then(response => {
@@ -145,4 +143,107 @@ function deleteCommentSection() {
       console.log('eyoo');
   });
   console.log("hellooo");
+}
+*/
+
+/** 
+ * This function is run every time the page reloads.
+ * First, it gets the comment section (with no comment limit)
+*/
+function reloadPage() {
+    getCommentSection(-1);
+    toggle_comment_visibility();
+    fetchBlobstoreUrlAndShowForm();
+    getImageUploads();
+}
+
+function toggle_comment_visibility() {
+    fetch('/login').then(response => response.json()).then((comments) => {
+      loginEl = document.getElementById("login");
+      addCommentEl = document.getElementById("leave-comment-form");
+      if (comments.loginStatus == 'true') {
+        addCommentEl.style.display = 'block';
+        document.getElementById("login-warning").innerHTML = comments.loginHTML;
+      } 
+      else if (comments.loginStatus == 'false') {
+        addCommentEl.style.display = 'none';
+        addCommentEl.appendChild(document.createTextNode(comments.loginHTML));
+        document.getElementById("login-warning").innerHTML = comments.loginHTML;
+      }
+    });
+}
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+      .then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+        const messageForm = document.getElementById('my-form');
+        messageForm.action = imageUploadUrl;
+        console.log('in here');
+        //messageForm.classList.remove('hidden');
+      });
+}
+
+/**
+ * gets images
+ */
+function getImageUploads() {
+    // fetch all comments
+    fetch('/my-form-handler').then((response) => response.json()).then((imgs) => {
+      const imgEl = document.getElementById('img-placeholder');
+      imgEl.innerHTML = "";
+      imgs.images.forEach((img) => {
+        addImage(imgEl, img);
+    })});
+  
+}
+
+function addImage(element, img) {
+    var imageCaptionDiv = document.createElement("div");
+    imageCaptionDiv.classList.add("input-img-caption-div");
+    element.append(imageCaptionDiv);
+
+    var imageDiv = document.createElement("div");
+    imageDiv.classList.add("input-img-div");
+    imageCaptionDiv.append(imageDiv);
+
+    var imageEl = document.createElement("img");
+    imageEl.src = img.url;
+    imageEl.classList.add("input-img");
+    console.log("adding img");
+    imageDiv.appendChild(imageEl);
+
+    var captionEl = document.createElement("p");
+    captionEl.innerText = img.message;
+    imageCaptionDiv.appendChild(captionEl);
+}
+
+
+
+function requestTranslation(comment) {
+    const text = comment.innerText;
+    const languageCode = document.getElementById('language').value;
+
+    const params = new URLSearchParams();
+    params.append('text', text);
+    params.append('languageCode', languageCode);
+
+    fetch('/translate', {
+        method: 'POST',
+        body: params
+    }).then(response => response.text())
+    .then((translatedMessage) => {
+        comment.innerText = translatedMessage;
+    });
+}
+
+function translateComments() {
+    const commentList = document.getElementById('comment-history');
+    var children = commentList.children;
+    for (var i = 0; i < children.length; i++) {
+        var comment = children[i];
+        requestTranslation(comment);
+    }
 }

@@ -38,7 +38,6 @@ nav li {
 
 .nav-a {
     color: white;
-    padding-right: 5px;
 }
 
 #nav-title {
@@ -77,6 +76,10 @@ h1,h2 {
     font-family: 'Merriweather', serif;
 }
 
+.dataTitle {
+    color: #23496E;
+}
+
 h2 {
     font-size: 36px;
 }
@@ -86,7 +89,7 @@ h3 {
     font-size: 24px
 }
 
-p {
+p, label {
    font-family: 'Caladea', serif;
    font-size:14px;
 }
@@ -96,17 +99,13 @@ h1, h2, h3, p {
     margin: 0 0 0 0;    
 }
 
-#title,
-#about-content,
-#contact-content,
-#random-content,
-#gallery-content,
-#project-content {
+#container {
     padding-top: 55px;
     padding-bottom: 75px;
     padding-left:20%;
     padding-right:20%;
     margin: 0 0 0 0;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 #title {
@@ -177,19 +176,6 @@ input[type=submit] {
 }
 
 input[type=submit]:hover{
-    background-color: #2F2B76;
-}
-
-.blueButton {
-    background-color: #1A165E;
-    border: none;
-    color: white;
-    font-family: 'Caladea', serif;
-    padding: 5px;
-    border-radius: 15%;
-}
-
-.blueButton:hover{
     background-color: #2F2B76;
 }
 

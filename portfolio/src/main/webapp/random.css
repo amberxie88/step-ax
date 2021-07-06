@@ -20,6 +20,7 @@
   --body-D: #CE7950;
   --random-A: #8DA8C2;
   --random-B: #5B7E9F;
+  --random-Title: #23496E;
 }
 
 /* Font */
@@ -38,7 +39,6 @@ nav li {
 
 .nav-a {
     color: white;
-    padding-right: 5px;
 }
 
 #nav-title {
@@ -77,6 +77,10 @@ h1,h2 {
     font-family: 'Merriweather', serif;
 }
 
+.dataTitle {
+    color: #23496E;
+}
+
 h2 {
     font-size: 36px;
 }
@@ -86,7 +90,7 @@ h3 {
     font-size: 24px
 }
 
-p {
+p, label {
    font-family: 'Caladea', serif;
    font-size:14px;
 }
@@ -96,17 +100,13 @@ h1, h2, h3, p {
     margin: 0 0 0 0;    
 }
 
-#title,
-#about-content,
-#contact-content,
-#random-content,
-#gallery-content,
-#project-content {
+#container {
     padding-top: 55px;
     padding-bottom: 75px;
     padding-left:20%;
     padding-right:20%;
     margin: 0 0 0 0;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 #title {
@@ -180,19 +180,6 @@ input[type=submit]:hover{
     background-color: #2F2B76;
 }
 
-.blueButton {
-    background-color: #1A165E;
-    border: none;
-    color: white;
-    font-family: 'Caladea', serif;
-    padding: 5px;
-    border-radius: 15%;
-}
-
-.blueButton:hover{
-    background-color: #2F2B76;
-}
-
 .form-button {
     background-color: #1A165E;
     border: none;
@@ -207,7 +194,7 @@ input[type=submit]:hover{
 }
 
 #comment-container{
-    background-color: var(--random-A);
+    /*background-color: var(--random-A);*/
     border-radius: 10px;
     padding: 5px;
     padding-left: 15px !important;
@@ -225,7 +212,7 @@ input[type=submit]:hover{
 }
 
 #comment-settings-container {
-    background-color: var(--random-A);
+    /*background-color: var(--random-A);*/
     border-radius: 10px;
     padding: 5px;
     padding-left: 15px !important;
@@ -235,7 +222,7 @@ input[type=submit]:hover{
 }
 
 #leave-comment {
-    background-color: var(--random-A);
+    /*background-color: var(--random-A);*/
     padding: 5px;
     padding-left:15px !important;
     padding-bottom: 15px !important;
@@ -290,7 +277,7 @@ button:hover{
 
 }
 #img-upload-gallery {
-    background-color: var(--random-B);
+    /*background-color: var(--random-B);*/
     border-radius: 10px;
     padding: 5px;
     padding-left: 15px !important;
@@ -300,10 +287,55 @@ button:hover{
 }
 
 #img-form-container {
-    background-color: var(--random-B);
+    /*background-color: var(--random-B);*/
     padding: 5px;
     padding-left:15px !important;
     padding-bottom: 15px !important;
     border-radius: 10px;
     margin-bottom: 10px;
+}
+
+.single-comment-meta-div {
+    display: flex;
+}
+
+.single-comment-meta-text {
+    margin-right: 10px;
+    color: var(--random-A);
+    font-family: 'Caladea', serif;
+    font-size: 14px;
+    padding-top: 15px;
+}
+
+.single-comment-div {
+    margin-left: 2px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 8px;
+    border-color: rgba(35, 73, 110, 0.7);
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.comment-thread-div {
+    margin-bottom: 15px;
+    margin-left: 2px;
+}
+
+.single-comment-username {
+    background-color: #798228;
+    color: white;
+    padding: 4px;
+    border-radius: 10px;
+    display: inline;
+}
+
+.single-comment-meta-div {
+    margin-bottom: 5px;
+}
+
+
+#comment-history {
+    margin-top: 10px;
 }

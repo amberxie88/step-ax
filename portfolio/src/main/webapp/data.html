@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data and Charts</title>
+    <link rel="stylesheet" href="data.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="data.js"></script>
+  </head>
+  <body>
+    <nav id="navbar">
+        <h1 id="nav-title">My Portfolio - Data and Charts</h1>
+        <div class="nav-items">
+            <ul>
+                <li class="nav-link">
+                    <a class="nav-a" href="index.html">Return Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>    
+
+    <div id="container">
+        <h1 class="dataTitle">Bigfoot Sightings</h1>
+        <div id="bigfoot-chart-container"></div>
+        <h1 class="dataTitle">Spotify's Top 100 Tracks</h1>
+        <p>Toggle through the settings to trends in Spotify's top 100 tracks in 2017 and 2018.</p>
+        <p>Note: valence corresponds to positivity / negativity. Higher valence means more positive feelings.</p>
+        <select id="musicProperty" onChange="getMusicChange(-1)">
+            <option value="3">Danceability</option>
+            <option value="4">Energy</option>
+            <option value="6">Loudness</option>
+            <option value="8">Speechiness</option>
+            <option value="9">Acousticness</option>
+            <option value="10">Instrumentalness</option>
+            <option value="11">Liveness</option>
+            <option value="12">Valence</option>
+            <option value="13">Tempo</option>
+        </select>
+        
+        <div id="music-chart-container"></div>
+        <label for="quantity">Number of Tracks Shown:</label>
+        <input onChange="getMusicChange(this.value)" type="number" id="quantity" name="quantity" min="1" max="100">
+  </div>
+  </body>
+</html>
+ 
